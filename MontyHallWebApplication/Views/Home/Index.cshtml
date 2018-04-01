@@ -1,0 +1,140 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Парадокс Монти Холла</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <main class="container">
+        <!-- Описание парадокса -->
+        <section class="description">
+            <h1>Парадокс Монти Холла</h1>
+            <p class="lead text-center">
+                Представьте, что вы стали участником игры, в которой вам нужно выбрать одну из трёх дверей.
+                За одной из дверей находится автомобиль, за двумя другими дверями — козы. Вы выбираете одну из дверей, например,
+                номер 1, после этого ведущий, который знает, где находится автомобиль, а где — козы, открывает одну из оставшихся
+                дверей, например, номер 3, за которой находится коза. После этого он спрашивает вас — не желаете ли вы изменить
+                свой выбор и выбрать дверь номер 2? Увеличатся ли ваши шансы выиграть автомобиль, если вы примете предложение
+                ведущего и измените свой выбор?
+            </p>
+        </section>
+
+        <!-- Мини-игра для проверки парадокса -->
+        <section>
+            <h2 class="text-center mb-4">Попробуйте сами</h2>
+
+            <!-- Двери-->
+            <div class="row">
+
+                <div class="col">
+                    <div class="reveal-wrapper">
+                        <div class="reveal-content">
+                            <h2>Коза</h2>
+                        </div>
+                        <div class="door" id="0">
+                            <h2>Дверь 1</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="reveal-wrapper">
+                        <div class="reveal-content">
+                            <h2>Коза</h2>
+                        </div>
+                        <div class="door" id="1">
+                            <h2>Дверь 2</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="reveal-wrapper">
+                        <div class="reveal-content">
+                            <h2>Коза</h2>
+                        </div>
+                        <div class="door" id="2">
+                            <h2>Дверь 3</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row align-items-center statistic">
+                <p class="col mb-0">
+                    Количество игр: <span id="gamesCount">0</span><br />
+                    Процент побед: <span id="percentageOfWin">0</span> %
+                </p>
+                <span id="message" class="col"></span>
+                <div class="col-auto">
+                    <button id="restart" class="btn btn-primary">Начать сначала</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Вычисление процента побед при заданной стратегии и количестве игр-->
+        <section>
+            <h2 class="text-center mb-4">Пусть компьютер сыграет за вас</h2>
+
+            <!-- Выбор количества игр-->
+            <div class="form-group row">
+                <label for="count" class="col-sm-2 col-form-label">Количество игр</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="count" placeholder="1000"/>
+                    <div class="feedback d-none">
+                        Введите положительное число
+                    </div>
+                </div>
+            </div>
+
+            <!-- Выбор стратегии-->
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Стратегия</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="strategy" id="notChange" checked>
+                            <label class="form-check-label" for="notChange">
+                                Не менять дверь
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="strategy" id="change">
+                            <label class="form-check-label" for="change">
+                                Менять дверь
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" id="execute" class="btn btn-primary">Сыграть</button>
+                </div>
+            </div>
+            
+            <div id="loading" class="pb-4">
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Вечтомов Михаил </span>
+        </div>
+    </footer>
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/game.js"></script>
+</body>
+</html>
