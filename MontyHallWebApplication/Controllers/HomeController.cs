@@ -9,7 +9,7 @@ namespace MontyHallWebApplication.Controllers
         /// <summary>
         /// Счетчик количества побед
         /// </summary>
-        private int wins = 0;
+        //private int wins = 0;
         public ActionResult Index()
         {
             return View();
@@ -22,26 +22,29 @@ namespace MontyHallWebApplication.Controllers
         /// <param name="count"> Количество игр </param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<JsonResult> GetPercentageOfWin(bool strategy, int count)
+        public async Task<JsonResult> StartPlaying(bool strategy, int count)
         {
-            await PlayManyTimesAsync(new Player(strategy), count);
+            int wins = await PlayManyTimesAsync(new Player(strategy), count);
             double result = ((double)wins / count) * 100;
 
             wins = 0;
 
-            return Json(result);
+            return Json(new { count, strategy, result });
         }
-        
+
         /// <summary>
         /// Играет count раз и считает количество побед
         /// </summary>
-        private Task PlayManyTimesAsync(Player player, int count)
+        private Task<int> PlayManyTimesAsync(Player player, int count)
         {
             return Task.Run(() => {
+                int wins = 0;
                 for (int i = 0; i < count; i++) {
                     if (player.Play())
                         wins++;
                 }
+
+                return wins;
             });
         }
     }

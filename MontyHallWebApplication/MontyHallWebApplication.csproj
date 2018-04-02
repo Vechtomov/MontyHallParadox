@@ -164,7 +164,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\car.png" />
+    <Content Include="Images\carbox_icon.png" />
+    <Content Include="Images\car_icon.png" />
+    <Content Include="Images\door_icon.png" />
     <Content Include="Images\goat.png" />
+    <Content Include="Images\goat_icon.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

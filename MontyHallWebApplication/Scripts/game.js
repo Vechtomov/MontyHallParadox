@@ -16,7 +16,7 @@ $(function () {
         $('#message').text("");
 
         doors[car] = true;
-        contents = $('.reveal-content h2');
+        contents = $('.reveal-content');
 
         // закрываем двери
         closeAllDoors();
@@ -24,14 +24,23 @@ $(function () {
         // ждем окончания закрытия дверей
         setTimeout(function(){
             for (var i = 0; i < 3; i++) {
-                contents[i].innerText = doors[i] ? "Автомобиль" : "Коза";
+                contents[i].children[0].innerText = doors[i] ? "Автомобиль" : "Коза";
+                contents[i].children[1].setAttribute('src', "/Images/" + (doors[i] ? "car_icon.png" : "goat_icon.png"));
             }
         }, 500);
     }
     
     Restart();
 
-    $('#restart').click(Restart);
+    $('#restart').click(function () {
+        gamesCount = 0;
+        winsCount = 0;
+
+        $('#gamesCount').text('0');
+        $('#percentageOfWin').text('0');
+
+        Restart();
+    });
 
     $('.door').click(function(){
         var index = $(this).attr('id');
@@ -79,8 +88,8 @@ $(function () {
                 winsCount++;
             }
 
-            $('#gamesCount')[0].innerText = gamesCount;
-            $('#percentageOfWin')[0].innerText = (winsCount / gamesCount) * 100;
+            $('#gamesCount').text(gamesCount);
+            $('#percentageOfWin').text(Round((winsCount / gamesCount) * 100));
 
             isGameEnded = true;
 
